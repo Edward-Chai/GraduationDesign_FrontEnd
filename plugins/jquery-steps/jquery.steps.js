@@ -1888,7 +1888,7 @@ var defaults = $.fn.steps.defaults = {
 
     /**
      * Fires before the step changes and can be used to prevent step changing by returning `false`. 
-     * Very useful for form validation. 
+     * Very useful for 新增员工.
      *
      * @property onStepChanging
      * @type Event
@@ -1919,7 +1919,7 @@ var defaults = $.fn.steps.defaults = {
 
     /**
      * Fires before finishing and can be used to prevent completion by returning `false`. 
-     * Very useful for form validation. 
+     * Very useful for 新增员工.
      *
      * @property onFinishing
      * @type Event
