@@ -292,27 +292,27 @@
                             <form id="add_staff" method="POST">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" class="form-control" name="staffName" maxlength="50" minlength="2" required>
+                                        <input type="text" class="form-control" name="staffName" id="staffName" maxlength="50" minlength="2" required>
                                         <label class="form-label">员工姓名</label>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="radio" name="gender" id="male" class="with-gap">
+                                    <input type="radio" name="gender" id="male" class="with-gap" value="1">
                                     <label for="male">男</label>
 
-                                    <input type="radio" name="gender" id="female" class="with-gap">
+                                    <input type="radio" name="gender" id="female" class="with-gap" value="0">
                                     <label for="female" class="m-l-20">女</label>
                                 </div>
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" class="form-control" name="birthday" required>
+                                        <input type="text" class="form-control" name="birthday" id="birthday" required>
                                         <label class="form-label">出生日期</label>
                                     </div>
                                     <div class="help-info">YYYY-MM-DD 格式</div>
                                 </div>
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" class="form-control" name="eday" required>
+                                        <input type="text" class="form-control" name="eday" id="employmentDate" required>
                                         <label class="form-label">就职日期</label>
                                     </div>
                                     <div class="help-info">YYYY-MM-DD 格式</div>
@@ -324,40 +324,29 @@
                                     </div>
                                     <div class="help-info">最小值: 0</div>
                                 </div>
-<!--                                <div class="form-group">-->
-<!--                                    <div class="form-line col-sm-6">-->
-<!--                                        <label class="form-control">职业-->
-<!--                                            <select class="form-control">-->
-<!--                                                <option value="">&#45;&#45; Please select &#45;&#45;</option>-->
-<!--                                                <option value="10">10</option>-->
-<!--                                                <option value="20">20</option>-->
-<!--                                                <option value="30">30</option>-->
-<!--                                                <option value="40">40</option>-->
-<!--                                                <option value="50">50</option>-->
-<!--                                            </select>-->
-<!--                                        </label>-->
-<!--                                    </div>-->
-<!--                                </div>-->
                                 <div class="form-group form-line row">
                                     <div class="col-md-3">
                                         <p style="color: #aaaaaa">
                                             职业
                                         </p>
-                                        <select class="form-control show-tick">
-                                            <optgroup label="Picnic">
-                                                <option>Mustard</option>
-                                                <option>Ketchup</option>
-                                                <option>Relish</option>
+                                        <select class="form-control show-tick" id="job">
+                                            <optgroup label="一般工种" id="yb">
                                             </optgroup>
-                                            <optgroup label="Camping">
-                                                <option>Tent</option>
-                                                <option>Flashlight</option>
-                                                <option>Toilet Paper</option>
+                                            <optgroup label="特殊工种" id="ts">
                                             </optgroup>
                                         </select>
                                     </div>
                                 </div>
-                                <button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
+                                <div class="form-group form-line row">
+                                    <div class="col-md-3">
+                                        <p style="color: #aaaaaa">
+                                            目前状态
+                                        </p>
+                                        <select class="form-control show-tick" id="ss">
+                                        </select>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary waves-effect" type="button" id="addStaffButton">SUBMIT</button>
                             </form>
                         </div>
                     </div>
@@ -392,6 +381,7 @@
     <script src="../../plugins/node-waves/waves.js"></script>
 
     <!-- Custom Js -->
+    <script src="../../js/myjs/staff.js"></script>
     <script src="../../js/admin.js"></script>
     <script src="../../js/pages/forms/form-validation.js"></script>
 
