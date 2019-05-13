@@ -40,6 +40,7 @@ $(document).ready(function () {
         $.ajax({
             url: "http://localhost:8080/staff/add?staffname="+$("#staffName").val()
                 +"&staffgender="+$("input[name='gender']:checked").val()
+                +"&cadre="+$("input[name='cadre']:checked").val()
                 +"&salary="+$("#salary").val()+"&employmentdate="+$("#employmentDate").val()
                 +"&birthday="+$("#birthday").val()+"&jobid="+$("#job").val()
                 +"&ssid="+$("#ss").val(),

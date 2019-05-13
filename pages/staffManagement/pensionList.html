@@ -115,7 +115,7 @@
                             <li>
                                 <a href="../../pages/staffManagement/addStaff.html">新增员工</a>
                             </li>
-                            <li class="active">
+                            <li>
                                 <a href="../../pages/staffManagement/staffList.html">员工列表</a>
                             </li>
                             <li>
@@ -130,7 +130,7 @@
                             <li>
                                 <a href="../../pages/staffManagement/addPension.html">添加养老待遇</a>
                             </li>
-                            <li>
+                            <li class="active">
                                 <a href="../../pages/staffManagement/pensionList.html">养老待遇列表</a>
                             </li>
                         </ul>
@@ -299,74 +299,43 @@
                                     <form id="add_staff" method="POST">
                                         <div class="form-group form-float">
                                             <div class="form-line focused">
-                                                <input type="text" class="form-control" name="staffId" id="staffId" readonly>
-                                                <label class="form-label">员工id</label>
+                                                <input type="text" class="form-control" id="balance" name="balance" min="0" required>
+                                                <label class="form-label" for="balance">个人账户养老金余额</label>
                                             </div>
+                                            <div class="help-info">最小值: 0</div>
                                         </div>
                                         <div class="form-group form-float">
                                             <div class="form-line focused">
-                                                <input type="text" class="form-control" name="staffName" id="staffName" maxlength="50" minlength="2" required>
-                                                <label class="form-label">员工姓名</label>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="radio" name="gender" id="male" class="with-gap" value="1">
-                                            <label for="male">男</label>
-
-                                            <input type="radio" name="gender" id="female" class="with-gap" value="0">
-                                            <label for="female" class="m-l-20">女</label>
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="radio" name="cadre" id="nc" class="with-gap" value="0">
-                                            <label for="nc">普通</label>
-
-                                            <input type="radio" name="cadre" id="ic" class="with-gap" value="1">
-                                            <label for="ic" class="m-l-20">干部</label>
-                                        </div>
-                                        <div class="form-group form-float">
-                                            <div class="form-line focused">
-                                                <input type="text" class="form-control" name="birthday" id="birthday" required>
-                                                <label class="form-label">出生日期</label>
-                                            </div>
-                                            <div class="help-info">YYYY-MM-DD 格式</div>
-                                        </div>
-                                        <div class="form-group form-float">
-                                            <div class="form-line focused">
-                                                <input type="text" class="form-control" name="eday" id="employmentDate" required>
-                                                <label class="form-label">就职日期</label>
-                                            </div>
-                                            <div class="help-info">YYYY-MM-DD 格式</div>
-                                        </div>
-                                        <div class="form-group form-float">
-                                            <div class="form-line focused">
-                                                <input type="text" class="form-control" id="salary" name="salary" min="0" required>
-                                                <label class="form-label" for="salary">薪金</label>
+                                                <input type="text" class="form-control" id="avg" name="avg" min="0" required>
+                                                <label class="form-label" for="avg">月平均养老金</label>
                                             </div>
                                             <div class="help-info">最小值: 0</div>
                                         </div>
                                         <div class="form-group form-line row">
                                             <div class="col-md-6">
                                                 <p style="color: #aaaaaa">
-                                                    职业
+                                                    计算方法
                                                 </p>
-                                                <select class="form-control show-tick" id="job">
-                                                    <optgroup label="一般工种" id="yb">
-                                                    </optgroup>
-                                                    <optgroup label="特殊工种" id="ts">
-                                                    </optgroup>
+                                                <select class="form-control show-tick" id="pensionState">
+                                                    <option value="0">正常发放</option>
+                                                    <option value="1">增发项目</option>
+                                                    <option value="2">自由调整</option>
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="form-group form-line row">
-                                            <div class="col-md-6">
-                                                <p style="color: #aaaaaa">
-                                                    目前状态
-                                                </p>
-                                                <select class="form-control show-tick" id="ss">
-                                                </select>
+                                        <div class="form-group form-float hidden" id="fileDiv">
+                                            <div class="form-line">
+                                                <input type="text" class="form-control" id="file" name="file" required>
+                                                <label class="form-label" for="file">按文件待遇调整</label>
                                             </div>
                                         </div>
-                                        <button class="btn btn-primary waves-effect" onclick="updateStaff()" type="button" id="addStaffButton">SUBMIT</button>
+                                        <div class="form-group form-float hidden" id="freeDiv">
+                                            <div class="form-line">
+                                                <input type="text" class="form-control" id="free" name="free" required>
+                                                <label class="form-label" for="free">自由调整</label>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-primary waves-effect" type="button" id="editPensionButton">SUBMIT</button>
                                     </form>
                                 </div>
                             </div>
@@ -385,7 +354,7 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                员工列表
+                                养老计划列表
                             </h2>
                         </div>
                         <div class="body">
@@ -393,6 +362,7 @@
                                 <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                                     <thead>
                                         <tr>
+                                            <th>计划id</th>
                                             <th>员工id</th>
                                             <th>员工姓名</th>
                                             <th>性别</th>
@@ -403,6 +373,11 @@
                                             <th>年龄</th>
                                             <th>出生日期</th>
                                             <th>入职日期</th>
+                                            <th>个人账户养老金</th>
+                                            <th>社平月工资</th>
+                                            <th>增发养老金</th>
+                                            <th>月养老金</th>
+                                            <th>计算方式</th>
                                             <th>操作</th>
                                         </tr>
                                     </thead>
@@ -450,7 +425,7 @@
     <!-- Custom Js -->
 
     <script src="../../js/myjs/jsGetAge.js"></script>
-    <script src="../../js/myjs/staffList.js"></script>
+    <script src="../../js/myjs/pensionList.js"></script>
     <script src="../../js/admin.js"></script>
 <!--    <script src="../../js/pages/tables/jquery-datatable.js"></script>-->
     <script src="../../js/pages/forms/form-validation.js"></script>

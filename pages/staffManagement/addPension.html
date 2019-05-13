@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Jquery DataTable | Bootstrap Based Admin Template - Material Design</title>
+    <title>新增员工 | Bootstrap Based Admin Template - Material Design</title>
     <!-- Favicon-->
     <link rel="icon" href="../../favicon.ico" type="image/x-icon">
 
@@ -21,14 +21,14 @@
     <!-- Animation Css -->
     <link href="../../plugins/animate-css/animate.css" rel="stylesheet" />
 
-    <!-- JQuery DataTable Css -->
-    <link href="../../plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
-
-    <!-- Bootstrap Select Css -->
-    <link href="../../plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+    <!-- Sweet Alert Css -->
+    <link href="../../plugins/sweetalert/sweetalert.css" rel="stylesheet" />
 
     <!-- Custom Css -->
     <link href="../../css/style.css" rel="stylesheet">
+
+    <!-- Bootstrap Select Css -->
+    <link href="../../plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="../../css/themes/all-themes.css" rel="stylesheet" />
@@ -115,7 +115,7 @@
                             <li>
                                 <a href="../../pages/staffManagement/addStaff.html">新增员工</a>
                             </li>
-                            <li class="active">
+                            <li>
                                 <a href="../../pages/staffManagement/staffList.html">员工列表</a>
                             </li>
                             <li>
@@ -127,7 +127,7 @@
                             <li>
                                 <a href="../../pages/staffManagement/addJob.html">职业管理</a>
                             </li>
-                            <li>
+                            <li class="active">
                                 <a href="../../pages/staffManagement/addPension.html">添加养老待遇</a>
                             </li>
                             <li>
@@ -285,136 +285,71 @@
         <!-- #END# Right Sidebar -->
     </section>
 
-    <!-- 模态框（Modal） -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                    <div class="row clearfix">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="card">
-                                <div class="header">
-                                    <h2>修改员工信息</h2>
-                                </div>
-                                <div class="body">
-                                    <form id="add_staff" method="POST">
-                                        <div class="form-group form-float">
-                                            <div class="form-line focused">
-                                                <input type="text" class="form-control" name="staffId" id="staffId" readonly>
-                                                <label class="form-label">员工id</label>
-                                            </div>
-                                        </div>
-                                        <div class="form-group form-float">
-                                            <div class="form-line focused">
-                                                <input type="text" class="form-control" name="staffName" id="staffName" maxlength="50" minlength="2" required>
-                                                <label class="form-label">员工姓名</label>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="radio" name="gender" id="male" class="with-gap" value="1">
-                                            <label for="male">男</label>
-
-                                            <input type="radio" name="gender" id="female" class="with-gap" value="0">
-                                            <label for="female" class="m-l-20">女</label>
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="radio" name="cadre" id="nc" class="with-gap" value="0">
-                                            <label for="nc">普通</label>
-
-                                            <input type="radio" name="cadre" id="ic" class="with-gap" value="1">
-                                            <label for="ic" class="m-l-20">干部</label>
-                                        </div>
-                                        <div class="form-group form-float">
-                                            <div class="form-line focused">
-                                                <input type="text" class="form-control" name="birthday" id="birthday" required>
-                                                <label class="form-label">出生日期</label>
-                                            </div>
-                                            <div class="help-info">YYYY-MM-DD 格式</div>
-                                        </div>
-                                        <div class="form-group form-float">
-                                            <div class="form-line focused">
-                                                <input type="text" class="form-control" name="eday" id="employmentDate" required>
-                                                <label class="form-label">就职日期</label>
-                                            </div>
-                                            <div class="help-info">YYYY-MM-DD 格式</div>
-                                        </div>
-                                        <div class="form-group form-float">
-                                            <div class="form-line focused">
-                                                <input type="text" class="form-control" id="salary" name="salary" min="0" required>
-                                                <label class="form-label" for="salary">薪金</label>
-                                            </div>
-                                            <div class="help-info">最小值: 0</div>
-                                        </div>
-                                        <div class="form-group form-line row">
-                                            <div class="col-md-6">
-                                                <p style="color: #aaaaaa">
-                                                    职业
-                                                </p>
-                                                <select class="form-control show-tick" id="job">
-                                                    <optgroup label="一般工种" id="yb">
-                                                    </optgroup>
-                                                    <optgroup label="特殊工种" id="ts">
-                                                    </optgroup>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group form-line row">
-                                            <div class="col-md-6">
-                                                <p style="color: #aaaaaa">
-                                                    目前状态
-                                                </p>
-                                                <select class="form-control show-tick" id="ss">
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <button class="btn btn-primary waves-effect" onclick="updateStaff()" type="button" id="addStaffButton">SUBMIT</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div>
-    <!-- /.modal -->
-
     <section class="content">
         <div class="container-fluid">
-            <!-- Exportable Table -->
+            <!-- Add Staff -->
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
-                            <h2>
-                                员工列表
-                            </h2>
+                            <h2>新增养老计划</h2>
                         </div>
                         <div class="body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped table-hover dataTable js-exportable">
-                                    <thead>
-                                        <tr>
-                                            <th>员工id</th>
-                                            <th>员工姓名</th>
-                                            <th>性别</th>
-                                            <th>职位</th>
-                                            <th>身份</th>
-                                            <th>目前状态</th>
-                                            <th>薪金</th>
-                                            <th>年龄</th>
-                                            <th>出生日期</th>
-                                            <th>入职日期</th>
-                                            <th>操作</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
-                            </div>
+                            <form id="add_staff" method="POST">
+                                <div class="form-group form-line row">
+                                    <div class="col-md-6">
+                                        <p style="color: #aaaaaa">
+                                            选择员工
+                                        </p>
+                                        <select class="form-control show-tick" id="staffId">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" id="balance" name="balance" min="0" required>
+                                        <label class="form-label" for="balance">个人账户养老金余额</label>
+                                    </div>
+                                    <div class="help-info">最小值: 0</div>
+                                </div>
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" id="avg" name="avg" min="0" required>
+                                        <label class="form-label" for="avg">月平均养老金</label>
+                                    </div>
+                                    <div class="help-info">最小值: 0</div>
+                                </div>
+<!--                                <div class="form-group form-line row">-->
+<!--                                    <div class="col-md-3">-->
+<!--                                        <p style="color: #aaaaaa">-->
+<!--                                            计算方法-->
+<!--                                        </p>-->
+<!--                                        <select class="form-control show-tick" id="pensionState">-->
+<!--                                            <option value="0">按文件待遇调整</option>-->
+<!--                                            <option value="1"></option>-->
+<!--                                            <option value="2">自由调整</option>-->
+<!--                                        </select>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="form-group form-float hidden">-->
+<!--                                    <div class="form-line">-->
+<!--                                        <input type="text" class="form-control" id="file" name="file" required>-->
+<!--                                        <label class="form-label" for="file">按文件待遇调整</label>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="form-group form-float hidden">-->
+<!--                                    <div class="form-line">-->
+<!--                                        <input type="text" class="form-control" id="free" name="free" required>-->
+<!--                                        <label class="form-label" for="free">自由调整</label>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+                                <button class="btn btn-primary waves-effect" type="button" id="addPensionButton">SUBMIT</button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- #END# Exportable Table -->
+            <!-- #End# Add Staff -->
         </div>
     </section>
 
@@ -433,26 +368,18 @@
     <!-- Jquery Validation Plugin Css -->
     <script src="../../plugins/jquery-validation/jquery.validate.js"></script>
 
+    <!-- JQuery Steps Plugin Js -->
+    <script src="../../plugins/jquery-steps/jquery.steps.js"></script>
+
+    <!-- Sweet Alert Plugin Js -->
+    <script src="../../plugins/sweetalert/sweetalert.min.js"></script>
+
     <!-- Waves Effect Plugin Js -->
     <script src="../../plugins/node-waves/waves.js"></script>
 
-    <!-- Jquery DataTable Plugin Js -->
-    <script src="../../plugins/jquery-datatable/jquery.dataTables.js"></script>
-    <script src="../../plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
-    <script src="../../plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
-    <script src="../../plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
-    <script src="../../plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
-    <script src="../../plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
-    <script src="../../plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
-    <script src="../../plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
-    <script src="../../plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
-
     <!-- Custom Js -->
-
-    <script src="../../js/myjs/jsGetAge.js"></script>
-    <script src="../../js/myjs/staffList.js"></script>
+    <script src="../../js/myjs/addPension.js"></script>
     <script src="../../js/admin.js"></script>
-<!--    <script src="../../js/pages/tables/jquery-datatable.js"></script>-->
     <script src="../../js/pages/forms/form-validation.js"></script>
 
     <!-- Demo Js -->
